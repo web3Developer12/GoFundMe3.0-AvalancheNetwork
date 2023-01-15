@@ -15,6 +15,10 @@
     margin:1.1% auto;
     /*box-shadow: rgba(83, 83, 88, 0.2) 0px 7px 29px 0px;*/
     transition:.3s;
+    z-index:12;
+  }
+  .navBar img {
+    cursor: pointer;
   }
   .search{
     display:flex;

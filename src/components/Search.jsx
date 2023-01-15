@@ -2,8 +2,12 @@ import './Search.css'
 import search from '/src/assets/search.svg'
 import filter from '/src/assets/filter.png'
 import poster from '/src/assets/gh.png'
+import { useNavigate } from 'react-router-dom'
 
 export default function Search(){
+
+    const navigate = useNavigate()
+
     return <div className="Search">
 
         <div className='SearchBarArea'>
@@ -22,7 +26,9 @@ export default function Search(){
         <div className='searchResults'>
             {
                 [1,2,3,4,5,6,7,8].map((el,index)=>{
-                    return <div className='campaignBody' key={index}>
+                    return <div className='campaignBody' key={index} onClick={()=>{
+                        navigate('/details')
+                    }}>
                 
                     <div className='campaignImage'>
                         <img src={poster} />
@@ -38,7 +44,7 @@ export default function Search(){
                             <div className='loader'>
                                 <div className='loader-value'>1</div>
                             </div>
-                            <p><span className='bold'>456$ </span>raised</p>
+                            <p><span className='bold'>{el*23}$ </span>raised</p>
                         </div>
                     </div>
                 </div>

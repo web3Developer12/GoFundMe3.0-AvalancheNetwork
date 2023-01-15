@@ -41,7 +41,9 @@ export default function NavBar(){
         <div className='horizontal'>
             <p>How it works?</p>
             <p>Connect wallet</p>
-            <button className={scrollYValue > 0 ? 'goActive':'go'}>Start a GoFundMe</button>
+            <button onClick={()=>{
+                navigate('/create')
+            }} className={scrollYValue > 0 ? 'goActive':'go'}>Start a GoFundMe</button>
         </div>
     </div>
 }

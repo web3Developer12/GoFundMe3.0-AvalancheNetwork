@@ -12,3 +12,14 @@
     font-family:"NunitoExtraBold";
     src: url("/src/assets/fonts/NunitoSans-ExtraBold.ttf");
 }
+
+.regular{
+    font-family:"NunitoRegular";
+}
+
+.bold{
+    font-family:"NunitoBold";
+}
+.extraBold{
+    font-family:"NunitoExtraBold";
+}

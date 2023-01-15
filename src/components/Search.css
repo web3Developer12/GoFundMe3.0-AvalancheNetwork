@@ -10,13 +10,14 @@
     justify-content:center;
     height:67px;
     background-color:white;
+    z-index:123;
 }
 .SearchBar{
     display:flex;
     align-items:center;
     justify-content:space-around;
     background-color:rgba(128, 128, 128, 0.075);
-    padding:7px;
+    padding:8px;
     border-radius:22px;
     width: 485px;
     padding-inline-start:2%;
@@ -34,7 +35,10 @@
     align-items:center;
     justify-content:space-between;
     width:100%;
+    transition:.3s;
+
 }
+
 .filter {
     padding:7px;
     display:flex;
@@ -57,7 +61,8 @@
     display:grid;
     grid-template-columns:repeat(4,1fr);
     grid-column-gap:12px;
-    margin-top:2%;
+    grid-row-gap:12px;
+    margin-top:3%;
     padding-inline:8%;
 }
 .campaignBody{
@@ -67,12 +72,17 @@
     overflow:hidden;
     cursor: pointer;
     transition:.3s;
+    border:.1px solid transparent;
+
+}
+.campaignBody:hover{
+    border:.1px solid rgba(128, 128, 128, 0.219);
 }
 .campaignImage{
     height:54%;
 }
 .campaignImage img {
-    height:90%;
+    height:91%;
     object-fit: contain;
     border-radius:23px;
 }
