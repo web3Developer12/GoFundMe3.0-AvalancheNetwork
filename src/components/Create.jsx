@@ -3,6 +3,8 @@ import logo from '/src/assets/logo2.svg'
 import { useState } from 'react'
 import chevronLeft from "/src/assets/chevron-left-solid.svg"
 import { Navigate, useNavigate } from 'react-router-dom'
+import storeFiles from '../ipfs/storage'
+import { MutatingDots, Oval } from 'react-loader-spinner'
 
 export default function Create(){
 
@@ -12,9 +14,45 @@ export default function Create(){
         "Monthly Bills","Newlyweds","Other","Sports","Travel","Volunter","Whishes"
     ])
 
-    const [selected,setSelected] = useState('')
-    const [index,setIndex]       = useState(0)
-    const navigate = useNavigate()
+    const [selected,setSelected]   = useState('')
+    const [index,setIndex]         = useState(0)
+    const [file,setFile]           = useState(undefined)
+    const navigate                 = useNavigate()
+    const [uploading,setUploading] = useState(false)
+
+    function validateImage(file){
+
+        var reader = new FileReader();
+
+        //Read the contents of Image File.
+        reader.readAsDataURL(file);
+        reader.onload = function (e) {
+
+        //Initiate the JavaScript Image object.
+        var image = new Image();
+
+        //Set the Base64 string return from FileReader as source.
+        image.src = e.target.result;
+
+        //Validate the File Height and Width.
+        image.onload = function () {
+
+            var height = this.height;
+            var width = this.width;
+
+            console.log(width)
+            console.log(height)
+
+            if( width < 1366 || height < 900){
+                console.log('Image minimum not require minimum');
+            }else {
+                console.log('Image valid');
+                setFile(file)
+            }
+
+        };
+        };
+    }
 
     
 
@@ -44,27 +82,38 @@ export default function Create(){
                         {   
                             index == 2 && "Provide fundraising"+"\n"+"information!"
                         }
-                         {   
+                        {   
                             index == 3 && "Provide fundraising"+"\n"+"information!"
                         }
                         
+                        {   
+                            index == 4 && "Provide fundraising"+"\n"+"information!"
+                        }
                         
                     </p>
                     <p className='regular sc-2'>
                         {
                             index == 0 && "We're here to guide you every step of the way."
                         }
+
                         {
                             index == -1 && "This information helps us get to know you and your fundraising needs."
                         }
+                        
                         {
                             index == 1 && "It's completely expected to need funds beyond your starting goal. You can always change your goal as you go."
                         }
+
                         {
                             index == 2 && "It's time to provide your fundraising information for high impact."
                         }
-                         {
+
+                        {
                             index == 3 && "It's time to provide your fundraising information for high impact."
+                        }
+                        
+                        {
+                            index == 4 && "It's time to provide your fundraising information for high impact."
                         }
                         
                     </p>
@@ -111,7 +160,7 @@ export default function Create(){
                 index == 2 &&  <div className='side-content-secondary-txt'>
                 <p className='regular sc-s-1'>Provide your title for high impact !</p>
                     <div className='input-donation3'>
-                            <input type="text" placeholder='Provide the name'/>
+                            <input type="text" placeholder='' autoFocus/>
                     </div>
                 </div>
             }
@@ -120,7 +169,39 @@ export default function Create(){
                 index == 3 &&  <div className='side-content-secondary-txt'>
                 <p className='regular sc-s-1'>Provide your description for high impact !</p>
                     <div className='input-donation4'>
-                            <textarea type="text" placeholder='Provide the description '/>
+                            <textarea type="text" autoFocus/>
+                    </div>
+                </div>
+            }
+            {
+                index == 4 &&  <div className='side-content-secondary-txt'>
+                <p className='regular sc-s-1'>Provide your image for high impact !</p>
+                    <div className='input-donation5'>
+                            <button className='upload' onClick={()=>{
+                                if(file != undefined){
+                                    storeFiles([file],setUploading)
+                                }
+                            }}>
+                                {
+                                    uploading == false ? "Upload" : <Oval
+                                    height="30"
+                                    width="30"
+                                    color="#4fa94d"
+                                    secondaryColor= '#4fa94d'
+                                    radius='12.5'
+                                    ariaLabel="mutating-dots-loading"
+                                    wrapperStyle={{}}
+                                    wrapperClass=""
+                                    visible={true}
+                                    strokeWidth={5}
+                                />
+                                }
+                                
+                            </button>
+
+                            <input type="file" autoFocus onChange={(e)=>{
+                                validateImage(e.target.files[0],setUploading)
+                            }}/>
                     </div>
                 </div>
             }

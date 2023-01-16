@@ -12,6 +12,7 @@ import AOS from 'aos';import 'aos/dist/aos.css';
 import { useEffect } from 'react'
 import FundraisingDetails from './components/Hero/FundraisingDetails'
 import Create from './components/Create'
+import { Toaster } from 'react-hot-toast'
 
 function Body(){
   useEffect(()=>{
@@ -29,7 +30,10 @@ function Body(){
 function App() {
   return (
     <div className="App">
-      
+      <Toaster
+        position="bottom-left"
+        reverseOrder={false}
+      />
       <Routes>
 
        <Route path="/" element={

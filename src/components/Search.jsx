@@ -25,7 +25,7 @@ export default function Search(){
 
         <div className='searchResults'>
             {
-                [1,2,3,4,5,6,7,8].map((el,index)=>{
+                [1].map((el,index)=>{
                     return <div className='campaignBody' key={index} onClick={()=>{
                         navigate('/details')
                     }}>

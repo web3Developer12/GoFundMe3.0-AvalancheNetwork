@@ -77,7 +77,8 @@
     font-size:16px;
     transition:.3s;
     padding:5px;
-    padding-inline:4%;
+    padding-inline:
+    4%;
     
 }
 .sc-options-selected{
@@ -166,6 +167,25 @@
     align-items:center;
     justify-content:space-between;
 }
+.input-donation5{
+    display:flex;
+    margin-top:2%;
+}
+.upload{
+    background-color:transparent;
+    border:.1px solid rgba(128, 128, 128, 0.096);
+    padding-inline:2%;
+    border-radius:5px;
+    cursor:pointer;
+    transition:.3s; 
+    font-family:"NunitoRegular";
+    margin-right:1%;
+
+}
+.upload:hover{
+    background-color:#02a95c;
+    color:white;
+}
 .input-donation2 p:nth-child(1){
     text-align:start;
     font-family:"NunitoExtraBold";
@@ -209,4 +229,20 @@
 .sc-c-min{
     color:gray;
     margin-top:2%;
+}
+
+input::file-selector-button {
+    font-weight: bold;
+    color: #02a95c;
+    background-color:transparent;
+    padding: 1em;
+    border: thin solid rgba(128, 128, 128, 0.11);
+    border-radius: 3px;
+    font-family:"NunitoRegular";
+    cursor: pointer;
+    transition:.3s;
+}
+input::file-selector-button:hover{
+    background-color:#02a95c;
+    color:white;
 }
