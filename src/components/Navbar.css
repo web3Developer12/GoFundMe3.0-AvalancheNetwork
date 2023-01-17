@@ -15,7 +15,7 @@
     margin:1.1% auto;
     /*box-shadow: rgba(83, 83, 88, 0.2) 0px 7px 29px 0px;*/
     transition:.3s;
-    z-index:12;
+    z-index:8;
   }
   .navBar img {
     cursor: pointer;
@@ -43,7 +43,7 @@
     align-items:center;
     justify-content:space-around;
     background-color:white;
-    height:66px;
+    height:62px;
     width:100%;
     font-family:"NunitoRegular";
     margin-top:0%;
@@ -51,6 +51,8 @@
     margin:0% auto;
     box-shadow: rgba(83, 83, 88, 0.2) 0px 7px 29px 0px;
     transition:.3s;
+    z-index:8;
+
 
   }
   .horizontal{

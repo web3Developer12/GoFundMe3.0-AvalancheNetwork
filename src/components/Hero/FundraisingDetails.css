@@ -1,27 +1,19 @@
 .FundraisingDetails{
     padding-inline:8%;
-    height:100vh;
+    height:100%;
     margin-top:10%;
     
 }
 .fundraisingDetailsGrid{
-    display:grid;
-    grid-template-columns:1fr 45%;
+    display:flex;
+    flex-direction:column;
 }
 
 .fundraisingBodyTitle{
     font-family:"NunitoExtraBold";
     font-size:33px;
 }
-.fundraisingImage{
-    background:url("/src/assets/gh.png");
-    background-size:cover;
-    background-position:center;
-    width:100%;
-    height:85%;
-    border-radius:23px;
-    margin-top:2%;
-}
+
 .fundraisingOrganizer{
     display:flex;
     align-items:center;
@@ -29,7 +21,7 @@
     padding-bottom:1%;
     font-family:"NunitoRegular";
     border-bottom:.1px solid rgba(128, 128, 128, 0.39);
-    margin-top:4%;
+    margin-top:1.5%;
     margin-bottom:4%;
 
 
@@ -59,10 +51,7 @@
     display:flex;
     align-items:center;
     justify-content:flex-start;
-    padding-bottom:3%;
     padding-top:3%;
-    margin-bottom:4%;
-
 
     font-family:"NunitoRegular";
     border-top:.1px solid rgba(128, 128, 128, 0.39);
@@ -72,6 +61,8 @@
    display:flex;
    align-items:center;
    justify-content:center;
+   min-height:345px;
+   height:100%;
 }
 .security-donation{
     width:100%;
@@ -87,11 +78,8 @@
     border-radius:100%;
 }
 .raising{
-    width:86%;
-    height: 87%;
     background-color:white;
     border-radius:17px;
-    box-shadow: rgba(83, 83, 88, 0.116) 0px 7px 29px 0px;
     display:flex;
     flex-direction:column;
     align-items:flex-start;
@@ -99,6 +87,8 @@
     padding-inline:5%;
     padding-top:8%;
     padding-bottom:3%;
+    min-height:275px;
+    box-shadow: rgba(83, 83, 88, 0.11) 0px 7px 29px 0px;
 
 }
 .raising p{
@@ -108,9 +98,9 @@
 }
 .countAvax{
     color:black;
-    font-family:"NunitoRegular";
+    font-family:"NunitoExtraBold";
     font-weight: 600;
-    font-size:23px;
+    font-size:33px;
 
 }
 .donate{
@@ -168,4 +158,24 @@
     color:black;
 
 
+}
+
+.row-fundraising{
+    width:100%;
+    min-height:345px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    grid-column-gap:34px;
+    margin-top:2%;
+}
+.fundraisingImage{
+    background:url("/src/assets/gh.png");
+    background-size:cover;
+    background-position:center;
+    width:83%;
+    min-height:345px;
+
+    height:100%;
+    border-radius:23px;
 }

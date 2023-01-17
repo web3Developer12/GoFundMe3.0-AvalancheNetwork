@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-spring/web": "^9.6.1",
     "@web3-react/injected-connector": "^6.0.7",
     "aos": "^2.3.4",
     "ethers": "^5.7.2",
@@ -16,6 +17,7 @@
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.0",
     "react-loader-spinner": "^5.3.4",
+    "react-loading-skeleton": "^3.1.0",
     "react-router-dom": "^6.6.2",
     "web3.storage": "^4.4.0"
   },

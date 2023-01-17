@@ -184,8 +184,8 @@ export default function Create(){
                             }}>
                                 {
                                     uploading == false ? "Upload" : <Oval
-                                    height="30"
-                                    width="30"
+                                    height="50"
+                                    width="50"
                                     color="#4fa94d"
                                     secondaryColor= '#4fa94d'
                                     radius='12.5'

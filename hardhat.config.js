@@ -10,5 +10,8 @@ module.exports = {
       accounts: [`0x` + process.env.PRIVATE_KEY],
       chainId: 43113,
     }
+  },
+  paths:{
+    artifacts:"./src/artifacts"
   }
 };

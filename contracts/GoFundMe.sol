@@ -1,6 +1,6 @@
 //SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.17;
+pragma solidity ^0.8.7;
 
 contract GoFundMe{
 
@@ -12,7 +12,9 @@ contract GoFundMe{
         string  category;
         string  title;
         string  description;
+        string  storageCid;
     }
+    
     struct campaign_funds {
         address raiser;
         uint256 amount;
@@ -41,13 +43,13 @@ contract GoFundMe{
 
     function launch(
         uint256 _startDate,uint256 _endDate,uint256 _raisedAmount,
-        string memory _category,string memory _title,string memory _description
+        string memory _category,string memory _title,string memory _description,string memory _cid
     ) external returns(bool){
 
         require(exist(_title) != true,"campaign already exist");
         campaign  memory _campaign= campaign(
             msg.sender,_startDate,_endDate,_raisedAmount,_category,
-            _title,_description
+            _title,_description,_cid
         );
 
         campaigns.push(_campaign);

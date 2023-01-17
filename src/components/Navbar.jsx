@@ -115,7 +115,7 @@ export default function NavBar(){
             
             <p>For charities</p>
             <div className='horizontal2' onClick={()=>{
-                var link = "https://testnet.snowtrace.io/address/0xbd989774c37C2E2b4aFDfd30f62698E3CDD3ffBD";
+                var link = "https://testnet.snowtrace.io/address/0xA3e2B8205A8eA192c7a74CF29864Be9779641478";
                 var target = "_blank";
                 window.open(link, target);
             }}>
