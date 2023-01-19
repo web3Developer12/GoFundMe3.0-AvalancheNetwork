@@ -24,11 +24,19 @@ export default function Search(){
                 "https://smart-proportionate-firefly.avalanche-testnet.discover.quiknode.pro/e50e4c28fa84cc37478458351791557262f126f8/ext/bc/C/rpc"
             );
             const contract = new ethers.Contract(
-                '0xA3e2B8205A8eA192c7a74CF29864Be9779641478',ABI.abi,provider
+                '0x1F30c09ee1e136Cca5f62fe50D0f1885338b3c6D',ABI.abi,provider
             )
-            let cleaned    = []
-            const data     = await contract.fetch()
+            let   data     = []
+            let   cleaned  = []
+            const keys     = await contract.getKeys()
+            
+            for(let key of keys){
+                let campaignRequest = await contract.fetchData(key)
+                data.push(campaignRequest)
+            }
+
             for(let campaign of data){
+                
                 const model = {
                     beneficiary:campaign.beneficiary,
                     startDate  :campaign.startDate.toString(),
@@ -37,12 +45,16 @@ export default function Search(){
                     category   :campaign.category,
                     title      :campaign.title,
                     description:campaign.description,
-                    storageCid :campaign.storageCid
+                    storageCid :campaign.storageCid,
+                    donation   :Number(campaign.fundsRegister),
+                    funds      :campaign.funds
                 }
+                console.log(model.donation)
                 cleaned.push(model)
             }
-            setDataLoading(false)
+            
             setData(cleaned)
+            setDataLoading(false)
         }
     }
     const launchCampaign = async()=>{
@@ -51,11 +63,12 @@ export default function Search(){
             const provider = await new ethers.providers.Web3Provider(ethereum)
             const signer   = provider.getSigner()
             const contract = new ethers.Contract(
-                '0xA3e2B8205A8eA192c7a74CF29864Be9779641478',ABI.abi,signer
+                '0x1F30c09ee1e136Cca5f62fe50D0f1885338b3c6D',ABI.abi,signer
             )
             const inject   = await contract.launch(
-                1,2,88,"Technology","Help the Avalanche Network Nodes","**UPDATE : This fundraiser was initially established to support a toy drive for Damar’s community, sponsored by the Chasing M’s Foundation. However, it has received renewed support in light of Damar’s current battle and we can’t thank all of you enough. Your generosity and compassion mean the world to us.","ipfs url"
+                1,"Technology","Help the Avalanche Network Nodes","**UPDATE : This fundraiser was initially established to support a toy drive for Damar’s community, sponsored by the Chasing M’s Foundation. However, it has received renewed support in light of Damar’s current battle and we can’t thank all of you enough. Your generosity and compassion mean the world to us.","ipfs url"
             )
+            await inject.wait()
             console.log(inject)
         }
     } 
@@ -64,6 +77,15 @@ export default function Search(){
         from  : { opacity: 0 },
         to    : { opacity: 1 },
     })
+
+    const getTotalRaised = (fundsArray)=>{
+        let sum=0;
+       for(let item of fundsArray){
+           const amount = item.amount
+            sum+=parseInt(amount._hex, 16)/(10**18)
+       }
+       return sum;
+    }
     
     
     useEffect(()=>{
@@ -108,7 +130,7 @@ export default function Search(){
             }
             {   dataLoading == false &&
                 data.map((el,index)=>{
-                    return <div className='campaignBody' key={index} onClick={()=>{
+                    return <div  className='campaignBody fadeInUp' style={{animationDelay:`${(index)*0.2}s`}} key={index} onClick={()=>{
                         navigate('/details',{state:el})
                     }}>
                 
@@ -124,9 +146,11 @@ export default function Search(){
     
                         <div className='bottom'>
                             <div className='loader'>
-                                <div className='loader-value'>1</div>
+                                <div className='loader-value' style={{
+                                    width:`${parseInt(getTotalRaised(el.funds) * 100 /(el.goal))}%`
+                                }}>1</div>
                             </div>
-                            <p><span className='bold'>{el*23}$ </span>raised</p>
+                            <p><span className='bold'>{getTotalRaised(el.funds)} Avax </span>raised</p>
                         </div>
                     </div>
                 </div>

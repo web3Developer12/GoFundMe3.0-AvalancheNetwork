@@ -115,7 +115,6 @@
 }
 .loader-value{
     background-color:#02a95c;
-    width:45%;
 }
 .bottom{
     width:100%;
@@ -150,12 +149,12 @@
     animation-duration: .7s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
-    }
+}
     @-webkit-keyframes fadeInUp {
     0% {
     opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
+    -webkit-transform: translate3d(0, 20%, 0);
+    transform: translate3d(0, 20%, 0);
     }
     100% {
     opacity: 1;
@@ -166,8 +165,8 @@
     @keyframes fadeInUp {
     0% {
     opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
+    -webkit-transform: translate3d(0, 20%, 0);
+    transform: translate3d(0, 20%, 0);
     }
     100% {
     opacity: 1;

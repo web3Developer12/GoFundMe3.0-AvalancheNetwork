@@ -4,3 +4,9 @@
   box-sizing:border-box;
   user-select:none;
 }
+
+* {
+  scrollbar-width:thin;          /* "auto" or "thin" */
+  scrollbar-color: #02a95c transparent;   /* scroll thumb and track */ 
+}
+

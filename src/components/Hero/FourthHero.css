@@ -2,7 +2,6 @@
     display:flex;
     align-items:center;
     justify-content:flex-start;
-    height:66vh;
     padding-inline-start:8%;
 }
 .head{
@@ -27,9 +26,9 @@
     transition:.3s;
     cursor: pointer;
     border:2px solid transparent;
-
-
-
+}
+.card img{
+    width:12vw;
 }
 .card-title{
     margin-top:8%;

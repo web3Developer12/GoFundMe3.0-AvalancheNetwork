@@ -2,6 +2,8 @@
     padding-inline:8%;
     height:100%;
     margin-top:10%;
+    display:grid;
+    grid-template-rows:23% 1fr;
     
 }
 .fundraisingDetailsGrid{

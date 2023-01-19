@@ -1,0 +1,45 @@
+@media (width < 1163px) {
+    .horizontal{
+        display:none;
+    }
+    .cardHeroGroup{
+        grid-template-columns:auto;
+        grid-template-rows:repeat(3,1fr);
+    }
+    .cardHero{
+        grid-row:3 span;
+        margin-top:4%;
+    }
+    .FourthHero{
+        flex-direction:column;
+        align-items:flex-start;
+        padding-inline:8%;
+        margin-top:8%;
+
+    }
+    .SecondHero{
+        margin-top:5.2%;
+    }
+    .cardGroup{
+        flex-direction:column;
+        align-items:flex-start;
+        margin-left:0%;
+    }
+    .card{
+        width:100%;
+        margin-bottom:4%;
+        display:flex;
+        align-items:center;
+        justify-content:flex-start;
+        height: 126px;
+        padding-inline:3%;
+
+    }
+    .card:nth-child(1){
+        margin-top:4%;
+    }
+    .card-title{
+        margin-top:0%;
+    
+    }
+}
