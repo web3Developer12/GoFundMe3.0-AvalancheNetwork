@@ -36,5 +36,5 @@ Please be aware that participating in a campaign is at your own risk. The Fundra
 
 ## Contact
 
-If you have any questions or issues with the Fundraiser dApp, please contact us at [fundraiser@avax.network](mailto:fundraiser@avax.network).
+If you have any questions or issues with the Fundraiser dApp, please contact us at [fundraiser@avax.network](mailto:officialsaimplice12@gmail.com).
 
