@@ -1,5 +1,2 @@
 # GoFundMe3.0
-Deployed to 0x1F30c09ee1e136Cca5f62fe50D0f1885338b3c6D
-
-
-**UPDATE : This fundraiser was initially established to support a toy drive for Damar’s community, sponsored by the Chasing M’s Foundation. However, it has received renewed support in light of Damar’s current battle and we can’t thank all of you enough. Your generosity and compassion mean the world to us.
+![GoFundMe3 0](https://user-images.githubusercontent.com/113187996/213584594-af828d8f-fb3f-44dd-aeae-01d5187f5863.jpg)
