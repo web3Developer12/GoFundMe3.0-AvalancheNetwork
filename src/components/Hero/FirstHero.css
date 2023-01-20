@@ -10,6 +10,7 @@
     justify-content:center;
     text-align:center;
     z-index:-1;
+    overflow:hidden;
 }
 
 .topHero{
@@ -52,12 +53,9 @@
 .topHero2 p:nth-child(1){
 
   font-family:"NunitoBold";
-  color:rgb(70, 70, 70);
+  color:rgb(252, 0, 0);
   padding-bottom:2.2%;
   z-index:-1;
-
-
-
   
 }
 .topHero2 p:nth-child(2){
@@ -68,13 +66,12 @@
 }
 
 .FirstHero p{
-  font-size:45px;
   font-family:"NunitoExtraBold";
   color: #01485c;
-  font-size: 3.6rem;
   line-height:61px;
   margin-bottom:2%;
   z-index:1;
+  font-size: calc(3em + 1.5vw);
 
 }
 .FirstHero button{
@@ -91,6 +88,7 @@
   justify-content:center;
   font-size: 1.1rem;
   transition:.6s;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.05);
 
 }
 .FirstHero button:hover{

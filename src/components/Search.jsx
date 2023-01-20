@@ -24,7 +24,7 @@ export default function Search(){
                 "https://smart-proportionate-firefly.avalanche-testnet.discover.quiknode.pro/e50e4c28fa84cc37478458351791557262f126f8/ext/bc/C/rpc"
             );
             const contract = new ethers.Contract(
-                '0x1F30c09ee1e136Cca5f62fe50D0f1885338b3c6D',ABI.abi,provider
+                '0xD3aE0CA870DEd5424629e369014A417218c4679d',ABI.abi,provider
             )
             let   data     = []
             let   cleaned  = []
@@ -45,7 +45,8 @@ export default function Search(){
                     category   :campaign.category,
                     title      :campaign.title,
                     description:campaign.description,
-                    storageCid :campaign.storageCid,
+                    storageCid :campaign.web3storage,
+                    path       :campaign.web3storagePath,
                     donation   :Number(campaign.fundsRegister),
                     funds      :campaign.funds
                 }
@@ -63,10 +64,10 @@ export default function Search(){
             const provider = await new ethers.providers.Web3Provider(ethereum)
             const signer   = provider.getSigner()
             const contract = new ethers.Contract(
-                '0x1F30c09ee1e136Cca5f62fe50D0f1885338b3c6D',ABI.abi,signer
+                '0xD3aE0CA870DEd5424629e369014A417218c4679d',ABI.abi,signer
             )
             const inject   = await contract.launch(
-                1,"Technology","Help the Avalanche Network Nodes","**UPDATE : This fundraiser was initially established to support a toy drive for Damar’s community, sponsored by the Chasing M’s Foundation. However, it has received renewed support in light of Damar’s current battle and we can’t thank all of you enough. Your generosity and compassion mean the world to us.","ipfs url"
+                1,"Technology","Help the Avalanche Network Nodes INBOX","**UPDATE : This fundraiser was initially established to support a toy drive for Damar’s community, sponsored by the Chasing M’s Foundation. However, it has received renewed support in light of Damar’s current battle and we can’t thank all of you enough. Your generosity and compassion mean the world to us.","ipfs url"
             )
             await inject.wait()
             console.log(inject)
@@ -135,13 +136,13 @@ export default function Search(){
                     }}>
                 
                     <div className='campaignImage'>
-                        <img src={poster} />
+                        <img src={`https://${el.storageCid}.ipfs.w3s.link/${el.path}`} />
                     </div>
                     <div className='campaignDetails'>
                         
                         <div>
-                            <p>{el.title}</p>
-                            <p>by {el.beneficiary.substring(0,4)+"..."+el.beneficiary.slice(-4)}</p>
+                            <p className='tlt'>{el.title}</p>
+                            <p className='by'>by {el.beneficiary.substring(0,4)+"..."+el.beneficiary.slice(-4)}</p>
                         </div>
     
                         <div className='bottom'>

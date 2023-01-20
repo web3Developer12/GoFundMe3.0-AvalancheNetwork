@@ -1,5 +1,6 @@
 import logo from '../assets/logo.svg'
 import search from '../assets/search.svg'
+import menu from '../assets/menu.png'
 import avalanche from '../assets/avalanche-avax-logo.svg'
 import './Navbar.css'
 import { useState } from 'react'
@@ -104,6 +105,7 @@ export default function NavBar(){
 
     return <div className={scrollYValue > 0 ? 'navBar-2':'navBar'}>
 
+        
         <div className='horizontal'>
             
             <div className='search' onClick={()=>{
@@ -126,9 +128,10 @@ export default function NavBar(){
             </div>
 
         </div>
+
         <img src={logo} onClick={()=>{
                 navigate('/')
-            }}/>
+        }}/>
 
         <div className='horizontal' style={{justifyContent:"flex-end",paddingInlineEnd:"1%"}}>
             <p>How it works?</p>
@@ -141,6 +144,37 @@ export default function NavBar(){
             <button onClick={()=>{
                 navigate('/create')
             }} className={scrollYValue > 0 ? 'goActive':'go'}>Start a GoFundMe</button>
+        </div>
+        <div className='mobsGroup'>
+            <div className='mob'>
+        
+                <div className='search' onClick={()=>{
+                    if(window.ethereum != true){
+
+                        toast.error("Install Metamask", {
+                            style: {
+                            border: '1px solid #eb4d4b',
+                            padding: '16px',
+                            color: '#eb4d4b',
+                            fontFamily:"NunitoRegular"
+                            },
+                            iconTheme: {
+                            primary: '#eb4d4b',
+                            secondary: 'white',
+                            },
+                        });
+
+                    }else{
+                        navigate('/search')
+                    }
+                }}>
+                    <img src={search} width={15}/>
+                    <span>Search</span>
+                </div>
+            </div>
+            <div className='mob'>
+                <img src={menu} width={28} className="menu"/>
+            </div>
         </div>
     </div>
 }

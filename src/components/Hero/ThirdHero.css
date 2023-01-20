@@ -19,8 +19,7 @@
     font-size:43px;
   }
   .ThirdHero p:nth-child(2){
-    width:75%;
     font-family:"NunitoRegular";
-    font-size:33px;
+    font-size:calc(1em + 1vw);
     margin-top:3%;
   }

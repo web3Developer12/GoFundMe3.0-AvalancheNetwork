@@ -19,6 +19,7 @@ contract GoFundMe{
         string  title;
         string  description;
         string  web3storage;
+        string  web3storagePath;
         uint256 fundsRegister;
         campaign_funds[] funds;
     }
@@ -39,7 +40,7 @@ contract GoFundMe{
     }
 
     function launch(
-        uint256 _goal,string calldata _category,string calldata _title,string calldata _description,string calldata _cid
+        uint256 _goal,string calldata _category,string calldata _title,string calldata _description,string calldata _cid,string calldata _cidPath
     ) external returns(bool){
 
         require(exist(_title) == false,"campaign already exist");
@@ -52,6 +53,7 @@ contract GoFundMe{
         _pointer_campaign.title       = _title;
         _pointer_campaign.description = _description;
         _pointer_campaign.web3storage = _cid;
+        _pointer_campaign.web3storagePath = _cidPath;
 
         campaigns[_title] = _pointer_campaign;
         title_ledger.push(_title);

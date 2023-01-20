@@ -9,7 +9,6 @@
     display:grid;
     grid-template-rows:13% 43%;
     padding-inline:10%;
-
 }
 .sc-1{
     font-size:28px;
@@ -77,8 +76,7 @@
     font-size:16px;
     transition:.3s;
     padding:5px;
-    padding-inline:
-    4%;
+    padding-inline:4%;
     
 }
 .sc-options-selected{
@@ -118,12 +116,10 @@
     background-color:rgba(128, 128, 128, 0.068);
 }
 .sc-s-continue-btn{
-    
-
     background-color: #02a95c;
     color:white;
-    height:52%;
-    width:18%;
+    min-height:52%;
+    min-width:18%;
     border:none;
     border-radius:13px;
     cursor: pointer;

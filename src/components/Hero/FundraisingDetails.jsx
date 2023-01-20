@@ -1,6 +1,6 @@
 import './FundraisingDetails.css'
 import gh from '/src/assets/gh.png'
-import user from '/src/assets/user-regular.svg'
+import userImage from '../../assets/user-regular.svg'
 import protection from '/src/assets/shield-halved-solid.svg'
 import { useLocation } from 'react-router-dom'
 import { BigNumber, ethers } from 'ethers'
@@ -23,7 +23,7 @@ export default function FundraisingDetails(){
                 const signer   = provider.getSigner()
                 
                 const contract = new ethers.Contract(
-                    '0x1F30c09ee1e136Cca5f62fe50D0f1885338b3c6D',ABI.abi,signer
+                    '0xD3aE0CA870DEd5424629e369014A417218c4679d',ABI.abi,signer
                 )
                 await contract.contribute(state.title,{value: ethers.utils.parseEther(avaxCount),})
         
@@ -111,14 +111,14 @@ export default function FundraisingDetails(){
                         }else{
                             toast.error("The campaign is closed", {
                                 style: {
-                                border: '1px solid orange',
-                                padding: '16px',
-                                color: 'orange',
-                                fontFamily:"NunitoRegular"
+                                    border: '1px solid orange',
+                                    padding: '16px',
+                                    color: 'orange',
+                                    fontFamily:"NunitoRegular"
                                 },
                                 iconTheme: {
-                                primary: 'orange',
-                                secondary: 'white',
+                                    primary: 'orange',
+                                    secondary: 'white',
                                 },
                             });
                         }
@@ -138,7 +138,7 @@ export default function FundraisingDetails(){
             </div>
             <div className='fundraisingOrganizer'>
                     <div className='avatar'>
-                        <img src={user} width={16}/>
+                        <img src={userImage} width={13}/>
                     </div>
                     <p>{state.beneficiary.substring(0,6)+"..."+state.beneficiary.slice(-6)} is organizing this fundraiser.</p>
             </div>

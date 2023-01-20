@@ -5,6 +5,9 @@ import chevronLeft from "/src/assets/chevron-left-solid.svg"
 import { Navigate, useNavigate } from 'react-router-dom'
 import storeFiles from '../ipfs/storage'
 import { MutatingDots, Oval } from 'react-loader-spinner'
+import { toast } from 'react-hot-toast'
+import ABI from '../artifacts/contracts/GoFundMe.sol/GoFundMe.json'
+import { ethers } from 'ethers'
 
 export default function Create(){
 
@@ -14,11 +17,21 @@ export default function Create(){
         "Monthly Bills","Newlyweds","Other","Sports","Travel","Volunter","Whishes"
     ])
 
-    const [selected,setSelected]   = useState('')
+    
     const [index,setIndex]         = useState(0)
     const [file,setFile]           = useState(undefined)
     const navigate                 = useNavigate()
     const [uploading,setUploading] = useState(false)
+
+
+    const [selected,setSelected]   = useState('')
+    const [title,setTitle]         = useState('')
+    const [goal,setGoal]           = useState('')
+    const [desc,setDesc]           = useState('')
+    const [cid,setCid]             = useState('')
+    const [path,setPath]           = useState('')
+    const [dataLoading,setDataLoading] = useState(false)
+
 
     function validateImage(file){
 
@@ -44,7 +57,19 @@ export default function Create(){
             console.log(height)
 
             if( width < 1366 || height < 900){
-                console.log('Image minimum not require minimum');
+
+                toast.error("Minimum size 1366x900", {
+                    style: {
+                    border: '1px solid #eb4d4b',
+                    padding: '16px',
+                    color: '#eb4d4b',
+                    fontFamily:"NunitoRegular"
+                    },
+                    iconTheme: {
+                    primary: '#eb4d4b',
+                    secondary: 'white',
+                    },
+                });
             }else {
                 console.log('Image valid');
                 setFile(file)
@@ -54,9 +79,43 @@ export default function Create(){
         };
     }
 
-    
-
+    const launchCampaign = async()=>{
+        const {ethereum}= window;
+        if(ethereum){
+            const provider = await new ethers.providers.Web3Provider(ethereum)
+            const signer   = provider.getSigner()
+            const contract = new ethers.Contract(
+                '0xD3aE0CA870DEd5424629e369014A417218c4679d',ABI.abi,signer
+            )
+            setDataLoading(true)
+            const inject   = await contract.launch(
+                goal,selected,title,desc,cid,path
+            )
+            await inject.wait()
+            console.log(inject)
+            navigate('/search')
+        }
+    } 
     return <div className="fundraising-create">
+
+            {
+                dataLoading && <div className='loadingData'>
+                    <div >
+                        <Oval
+                            height="70"
+                            width="70"
+                            color="#4fa94d"
+                            secondaryColor= '#4fa94d'
+                            radius='17.5'
+                            ariaLabel="mutating-dots-loading"
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                            visible={true}
+                            strokeWidth={.7}
+                        />
+                    </div>
+                </div>
+            }
 
         <div className="side-content">
             <div className='sc-spacer'></div>
@@ -148,7 +207,10 @@ export default function Create(){
                     <div className='input-donation2'>
                             <p><span className='dollar'>$</span><br/>AVAX</p>
                             <div className='inputDecimal'>
-                            <input type="text" minLength={13} min={13}/>
+                            <input value={goal} onChange={(e)=>{
+                                setGoal(e.target.value)
+                                
+                            }} type="text" minLength={13} min={13}/>
                             <p>.00</p>
                             </div>
                     </div>
@@ -160,7 +222,9 @@ export default function Create(){
                 index == 2 &&  <div className='side-content-secondary-txt'>
                 <p className='regular sc-s-1'>Provide your title for high impact !</p>
                     <div className='input-donation3'>
-                            <input type="text" placeholder='' autoFocus/>
+                            <input value={title} onChange={
+                                (e)=>{setTitle(e.target.value)}
+                            } type="text" placeholder='' autoFocus/>
                     </div>
                 </div>
             }
@@ -169,7 +233,9 @@ export default function Create(){
                 index == 3 &&  <div className='side-content-secondary-txt'>
                 <p className='regular sc-s-1'>Provide your description for high impact !</p>
                     <div className='input-donation4'>
-                            <textarea type="text" autoFocus/>
+                            <textarea value={desc} onChange={(e)=>{
+                                setDesc(e.target.value)
+                            }} type="text" autoFocus/>
                     </div>
                 </div>
             }
@@ -177,9 +243,38 @@ export default function Create(){
                 index == 4 &&  <div className='side-content-secondary-txt'>
                 <p className='regular sc-s-1'>Provide your image for high impact !</p>
                     <div className='input-donation5'>
-                            <button className='upload' onClick={()=>{
+                            <button className='upload' onClick={async()=>{
                                 if(file != undefined){
-                                    storeFiles([file],setUploading)
+                                    const res = await storeFiles([file],setUploading)
+                                    if(res.toString().trim().length > 1){
+                                        setCid(res)
+                                    }else{
+                                        toast.error("Upload failed !", {
+                                            style: {
+                                            border: '1px solid #eb4d4b',
+                                            padding: '16px',
+                                            color: '#eb4d4b',
+                                            fontFamily:"NunitoRegular"
+                                            },
+                                            iconTheme: {
+                                            primary: '#eb4d4b',
+                                            secondary: 'white',
+                                            },
+                                        });
+                                    }
+                                }else{
+                                    toast.error("Select your image", {
+                                        style: {
+                                        border: '1px solid #eb4d4b',
+                                        padding: '16px',
+                                        color: '#eb4d4b',
+                                        fontFamily:"NunitoRegular"
+                                        },
+                                        iconTheme: {
+                                        primary: '#eb4d4b',
+                                        secondary: 'white',
+                                        },
+                                    });
                                 }
                             }}>
                                 {
@@ -201,6 +296,7 @@ export default function Create(){
 
                             <input type="file" autoFocus onChange={(e)=>{
                                 validateImage(e.target.files[0],setUploading)
+                                setPath(e.target.files[0].name)
                             }}/>
                     </div>
                 </div>
@@ -220,9 +316,81 @@ export default function Create(){
                 }
                 
                 <button onClick={()=>{
-                    setIndex(index+1)
-                }}className='sc-s-continue-btn extraBold'>Continue</button>
+                    if(
+                        !Number.isInteger(parseFloat(goal)) && index == 1 ||
+                        goal.trim().length < 1  && index == 1
+                        
+                    ){
+                        toast.error("The goal is incorrect", {
+                            style: {
+                            border: '1px solid #eb4d4b',
+                            padding: '16px',
+                            color: '#eb4d4b',
+                            fontFamily:"NunitoRegular"
+                            },
+                            iconTheme: {
+                            primary: '#eb4d4b',
+                            secondary: 'white',
+                            },
+                        });
+                    }else if(
+                        title.trim().length < 32
+                        && index == 2
+                    ){
+                        toast.error("Mininum characters is 32", {
+                            style: {
+                            border: '1px solid #eb4d4b',
+                            padding: '16px',
+                            color: '#eb4d4b',
+                            fontFamily:"NunitoRegular"
+                            },
+                            iconTheme: {
+                            primary: '#eb4d4b',
+                            secondary: 'white',
+                            },
+                        });
+                    }else if(
+                        desc.trim().length < 306
+                        && index == 3
+                    ){
+                        toast.error("Mininum characters is 306", {
+                            style: {
+                            border: '1px solid #eb4d4b',
+                            padding: '16px',
+                            color: '#eb4d4b',
+                            fontFamily:"NunitoRegular"
+                            },
+                            iconTheme: {
+                            primary: '#eb4d4b',
+                            secondary: 'white',
+                            },
+                        });
+                    }else if(
+                        cid.trim().length < 1
+                        && index == 4
+                    ){
+                        toast.error("Upload your image", {
+                            style: {
+                            border: '1px solid #eb4d4b',
+                            padding: '16px',
+                            color: '#eb4d4b',
+                            fontFamily:"NunitoRegular"
+                            },
+                            iconTheme: {
+                            primary: '#eb4d4b',
+                            secondary: 'white',
+                            },
+                        });
+                    }else{
+                        if(index < 4){
+                            setIndex(index+1);
+                        }else{
+                            launchCampaign()
+                        }
+                    }
+                }}className='sc-s-continue-btn extraBold'>{index == 4 ?"Launch":"Continue"}</button>
             </div>
+            
         </div>
     </div>
 }

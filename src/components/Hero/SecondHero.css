@@ -8,14 +8,14 @@
     margin-inline:12%;
 }
 .SecondHero p:nth-child(1){
-    color: ted;
-    font-family:"NunitoRegular";
+    color:rgb(73, 73, 73);
+    font-family:"NunitoBold";
 
 }
 .SecondHero p:nth-child(2){
     color: ted;
     font-family:"NunitoExtraBold";
-    font-size:33px;
+    font-size:calc(2em + 1vw);
 
 }
 .cardHero{

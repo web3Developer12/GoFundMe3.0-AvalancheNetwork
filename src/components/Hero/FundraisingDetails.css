@@ -13,7 +13,7 @@
 
 .fundraisingBodyTitle{
     font-family:"NunitoExtraBold";
-    font-size:33px;
+    font-size:calc(1em + 1.2vw);
 }
 
 .fundraisingOrganizer{
@@ -29,11 +29,12 @@
 
 }
 .fundraisingOrganizer p{
+    font-size:calc(1em + .2vw);
     margin-left:2%;
 }
 .avatar {
-    width:46px;
-    height:46px;
+    min-width:46px;
+    min-height:46px;
     border-radius:100%;
     display:flex;
     align-items:center;
